@@ -101,6 +101,14 @@ public class ListaObj <T> {
     public void limpa() {
         nroElem = 0;
     }
+
+    public void atualiza(int indice, T novoElemento) {
+        if (indice < 0 || indice >= nroElem) {
+            System.out.println("Índice inválido");
+        } else {
+            vetor[indice] = novoElemento;
+        }
+    }
 }
 
 
