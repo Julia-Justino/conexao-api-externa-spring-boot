@@ -12,6 +12,7 @@ import org.springframework.web.client.RestClient;
 import school.sptech.democonexaoapiexterna.dto.BancoApiMockDto;
 import school.sptech.democonexaoapiexterna.dto.BancoMockDto;
 import school.sptech.democonexaoapiexterna.comandos.Ordenacao;
+import school.sptech.democonexaoapiexterna.dto.SomaDiasResponse;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -42,6 +43,15 @@ public class ItemMockController {
         Ordenacao.quickSort(respostaOrdenada);
         return ResponseEntity.ok(respostaOrdenada);
     }
+
+    @GetMapping("/soma/{num}")
+    public ResponseEntity<SomaDiasResponse> somaDias(@PathVariable int num) {
+        BancoMockDto[] respostaOrdenada = getBancoMockDtoArray();
+        int soma = Ordenacao.calcularSomaRecursiva(respostaOrdenada, num);
+        SomaDiasResponse response = new SomaDiasResponse(soma);
+        return ResponseEntity.ok().body(response);
+    }
+
 
     @GetMapping("/conversao-padrao/{id}")
     @Operation(summary = "Listar itens da API mock Ordenados")

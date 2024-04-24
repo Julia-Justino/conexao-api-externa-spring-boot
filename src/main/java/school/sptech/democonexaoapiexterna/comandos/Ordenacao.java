@@ -3,6 +3,20 @@ package school.sptech.democonexaoapiexterna.comandos;
 import school.sptech.democonexaoapiexterna.dto.BancoMockDto;
 
 public class Ordenacao {
+    public static int calcularSomaRecursiva(BancoMockDto[] lista, int num) {
+        return calcularSomaRecursivaAux(lista, lista.length - 1, num);
+    }
+
+    private static int calcularSomaRecursivaAux(BancoMockDto[] lista, int index, int num) {
+        if (index < 0) {
+            return 0;
+        }
+        if (lista[index].getDiasVencimento() == num) {
+            return lista[index].getDiasVencimento() + calcularSomaRecursivaAux(lista, index - 1, num);
+        }
+        return calcularSomaRecursivaAux(lista, index - 1, num);
+    }
+
     public static void mergeSort(BancoMockDto[] arr) {
         if (arr == null || arr.length <= 1) {
             return;
